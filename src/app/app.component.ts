@@ -43,8 +43,8 @@ export class AppComponent {
   }
 
   // - Users can edit a to-do
-  // - A list with all the completed to-do’s
-  // - Users can see a list with all the active to-do’s
-  // - User can see the date when he created the to-do
+  // OK - A list with all the completed to-do’s
+  // OK - Users can see a list with all the active to-do’s
+  // OK - User can see the date when he created the to-do
   // - When closing the browser window the to-do’s will be stored and when the User returns, the data will be retrieved
 }

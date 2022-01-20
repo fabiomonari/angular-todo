@@ -12,9 +12,30 @@
 </section>
 
 <section class="item-list">
-  <div *ngFor="let todo of todos" [class.done]="todo.status">
-    <input type="checkbox" [checked]="todo.status" (change)="doneTodo(todo)" />
-    <span>{{ todo.text }}</span>
-    <span>{{ this.todo.time | date: "dd/MM/YY hh:mm:ss" }}</span>
+  <div class="todo-list">
+    <div *ngFor="let todo of todos">
+      <ng-template [ngIf]="!todo.status">
+        <input
+          type="checkbox"
+          [checked]="todo.status"
+          (change)="doneTodo(todo)"
+        />
+        <span>{{ todo.text }}</span>
+        <span>{{ this.todo.time | date: "dd/MM/YY hh:mm:ss" }}</span>
+      </ng-template>
+    </div>
+  </div>
+  <div class="done-list">
+    <div *ngFor="let todo of todos" [class.done]="todo.status">
+      <ng-template [ngIf]="todo.status">
+        <input
+          type="checkbox"
+          [checked]="todo.status"
+          (change)="doneTodo(todo)"
+        />
+        <span>{{ todo.text }}</span>
+        <span>{{ this.todo.time | date: "dd/MM/YY hh:mm:ss" }}</span>
+      </ng-template>
+    </div>
   </div>
 </section>
