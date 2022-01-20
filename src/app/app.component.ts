@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Todo } from './todo.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,14 @@ import { Todo } from './todo.model';
 export class AppComponent {
   newTodo: string = '';
   todos: Todo[] = [
-    { text: 'Buy beer', status: false },
-    { text: 'Finish this code', status: false },
+    { text: 'Buy beer', status: true, time: 1642653703431 },
+    {
+      text: 'Start a angular app',
+      status: true,
+      time: 1642653779421,
+    },
+    { text: 'Finish this code', status: false, time: 1642653780050 },
+    { text: 'Study observables', status: false, time: 1642653792126 },
   ];
 
   newTodoUpdate(input: Event): void {
@@ -18,9 +25,21 @@ export class AppComponent {
   }
 
   addNewTodo(): void {
-    if (this.newTodo) this.todos.push({ text: this.newTodo, status: false });
+    if (this.newTodo)
+      this.todos.push({
+        text: this.newTodo,
+        status: false,
+        time: moment().valueOf(),
+      });
     this.newTodo = '';
-    console.log(this.todos);
+  }
+
+  doneTodo(clickedTodo: Todo): void {
+    this.todos.filter((todo) => {
+      if (todo.text === clickedTodo.text) {
+        todo.status = !todo.status;
+      }
+    });
   }
 
   // - Users can edit a to-do
