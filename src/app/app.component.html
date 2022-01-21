@@ -11,7 +11,7 @@
   <button (click)="addNewTodo()" [disabled]="!newTodo">Add</button>
 </section>
 
-<section class="item-list">
+<section class="items-list">
   <div class="todo-list">
     <div *ngFor="let todo of todos">
       <ng-template [ngIf]="!todo.status">
@@ -20,7 +20,12 @@
           [checked]="todo.status"
           (change)="doneTodo(todo)"
         />
-        <span>{{ todo.text }}</span>
+        <input
+          #item
+          type="text"
+          [value]="todo.text"
+          (change)="updateTodo(todo.id, item.value)"
+        />
         <span>{{ this.todo.time | date: "dd/MM/YY hh:mm:ss" }}</span>
       </ng-template>
     </div>
@@ -28,6 +33,7 @@
   <div class="done-list">
     <div *ngFor="let todo of todos" [class.done]="todo.status">
       <ng-template [ngIf]="todo.status">
+        <span>{{ todo.id }}</span>
         <input
           type="checkbox"
           [checked]="todo.status"

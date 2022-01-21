@@ -10,14 +10,15 @@ import * as moment from 'moment';
 export class AppComponent {
   newTodo: string = '';
   todos: Todo[] = [
-    { text: 'Buy beer', status: true, time: 1642653703431 },
+    { id: 1, text: 'Buy beer', status: true, time: 1642653703431 },
     {
+      id: 2,
       text: 'Start a angular app',
       status: true,
       time: 1642653779421,
     },
-    { text: 'Finish this code', status: false, time: 1642653780050 },
-    { text: 'Study observables', status: false, time: 1642653792126 },
+    { id: 3, text: 'Finish this code', status: false, time: 1642653780050 },
+    { id: 4, text: 'Study observables', status: false, time: 1642653792126 },
   ];
 
   newTodoUpdate(input: Event): void {
@@ -27,11 +28,22 @@ export class AppComponent {
   addNewTodo(): void {
     if (this.newTodo)
       this.todos.push({
+        id: this.todos.length + 1,
         text: this.newTodo,
         status: false,
         time: moment().valueOf(),
       });
     this.newTodo = '';
+  }
+
+  updateTodo(id: number, value: string): void {
+    this.todos.filter((todo) => {
+      if (todo.id === id) {
+        todo.text = value;
+        console.log(todo.text);
+      }
+    });
+    console.log(this.todos);
   }
 
   doneTodo(clickedTodo: Todo): void {
@@ -42,7 +54,7 @@ export class AppComponent {
     });
   }
 
-  // - Users can edit a to-do
+  // OK - Users can edit a to-do
   // OK - A list with all the completed to-do’s
   // OK - Users can see a list with all the active to-do’s
   // OK - User can see the date when he created the to-do
