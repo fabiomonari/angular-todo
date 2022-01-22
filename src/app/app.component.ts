@@ -36,20 +36,18 @@ export class AppComponent {
     this.newTodo = '';
   }
 
-  updateTodo(id: number, value: string): void {
-    this.todos.filter((todo) => {
-      if (todo.id === id) {
-        todo.text = value;
-        console.log(todo.text);
+  updateTodo(todoId: number, todoValue: string): void {
+    this.todos.filter((item) => {
+      if (item.id === todoId) {
+        item.text = todoValue;
       }
     });
-    console.log(this.todos);
   }
 
-  doneTodo(clickedTodo: Todo): void {
-    this.todos.filter((todo) => {
-      if (todo.text === clickedTodo.text) {
-        todo.status = !todo.status;
+  doneTodo(todoId: number): void {
+    this.todos.filter((item) => {
+      if (item.id === todoId) {
+        item.status = !item.status;
       }
     });
   }
@@ -58,5 +56,6 @@ export class AppComponent {
   // OK - A list with all the completed to-do’s
   // OK - Users can see a list with all the active to-do’s
   // OK - User can see the date when he created the to-do
+  // - Delete todo
   // - When closing the browser window the to-do’s will be stored and when the User returns, the data will be retrieved
 }
