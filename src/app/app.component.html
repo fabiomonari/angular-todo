@@ -1,18 +1,30 @@
-<nav>Navbar</nav>
+<header>
+  <img
+    class="logo"
+    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+    alt="Angular Logo"
+  />
+  <h1>Angular Todo List</h1>
+</header>
 
-<section class="new-item">
+<section class="new-todo">
   <input
     type="text"
-    placeholder="New Item"
+    placeholder="New Todo"
     [value]="newTodo"
     (input)="newTodoUpdate($event)"
     (keyup.enter)="addNewTodo()"
   />
-  <button (click)="addNewTodo()" [disabled]="!newTodo">Add</button>
+  <button class="icon" (click)="addNewTodo()" [disabled]="!newTodo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M0 0h24v24H0V0z" fill="none" />
+      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+    </svg>
+  </button>
 </section>
 
-<section class="todo-list">
-  <div *ngFor="let todo of todos" [class.done]="todo.status">
+<ul class="todo-list">
+  <li *ngFor="let todo of todos" [class.done]="todo.status">
     <input
       class="todo-checkbox"
       type="checkbox"
@@ -31,5 +43,5 @@
     <span class="todo-time">{{
       this.todo.time | date: "dd/MM/YY hh:mm:ss"
     }}</span>
-  </div>
-</section>
+  </li>
+</ul>

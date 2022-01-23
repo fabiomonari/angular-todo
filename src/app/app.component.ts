@@ -57,5 +57,6 @@ export class AppComponent {
   // OK - Users can see a list with all the active to-do’s
   // OK - User can see the date when he created the to-do
   // - Delete todo
+  // - On click item, focus on input
   // - When closing the browser window the to-do’s will be stored and when the User returns, the data will be retrieved
 }

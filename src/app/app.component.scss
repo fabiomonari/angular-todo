@@ -1,3 +1,158 @@
-.done {
-  text-decoration: line-through;
+@use "sass:color";
+
+$backColor: hsl(0, 0%, 90%);
+$itemBackColor: darken($backColor, 10%);
+$itemBackColorHover: darken($backColor, 5%);
+$angularColor: hsl(347, 100%, 43%);
+$neuShadow: 0.4rem 0.4rem 0.4rem $itemBackColor,
+  -0.4rem -0.4rem 0.4rem hsl(0, 0%, 100%);
+$neuShadowInset: inset 0.4rem 0.4rem 0.4rem $itemBackColor,
+  inset -0.4rem -0.4rem 0.4rem hsl(0, 0%, 100%);
+$itemPadding: 0.4rem 1rem;
+
+:host {
+  display: block;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 102.4rem;
+  min-width: 36rem;
+  margin: auto;
+  overflow: hidden auto;
+  padding: 2rem;
+  background: $backColor;
+
+  &,
+  input {
+    color: hsl(0, 0%, 50%);
+    font-size: 1.6rem;
+  }
+}
+
+input {
+  background: transparent;
+  outline: none;
+  border: 0;
+  border-radius: 1rem;
+}
+
+button.icon {
+  border: none;
+  width: 4rem;
+  height: 4rem;
+  flex-shrink: 0;
+  color: $angularColor;
+  fill: $angularColor;
+  border-radius: 1rem;
+  padding: 0.4rem;
+  background: none;
+  transition: opacity 0.4s, filter 0.4s;
+
+  &:disabled {
+    filter: grayscale(1);
+    opacity: 20%;
+  }
+
+  svg {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: $itemBackColorHover;
+  }
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .logo {
+    height: 8rem;
+    margin: 0;
+  }
+
+  h1 {
+    color: $angularColor;
+    text-align: center;
+    font-size: 3.2rem;
+  }
+}
+
+.new-todo {
+  margin: 4rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  input[type="text"] {
+    width: 100%;
+    height: 4rem;
+    padding: $itemPadding;
+    box-shadow: $neuShadowInset;
+  }
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column-reverse;
+  list-style: none;
+
+  li {
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+    padding: $itemPadding;
+    box-shadow: $neuShadow;
+
+    &:hover,
+    &:active,
+    &:focus {
+      cursor: pointer;
+      background-color: $itemBackColorHover;
+    }
+
+    > input[type="text"] {
+      &:hover {
+        cursor: pointer;
+      }
+      &:active,
+      &:focus {
+        color: $angularColor;
+      }
+    }
+
+    .todo-time {
+      margin-left: auto;
+      font-size: 1.2rem;
+      font-family: monospace;
+      width: 6rem;
+      text-align: right;
+    }
+
+    &.done {
+      text-decoration: line-through;
+      order: -1;
+      color: hsl(0, 0%, 70%);
+      box-shadow: inset 0.1rem 0.1rem 0.1rem #cccccc,
+        inset -0.1rem -0.1rem 0.1rem white;
+
+      &:hover,
+      &:active,
+      &:focus {
+        cursor: default;
+        background-color: unset;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  :host {
+    padding: 4rem;
+  }
 }
