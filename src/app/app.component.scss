@@ -2,7 +2,6 @@
 
 $backColor: hsl(0, 0%, 90%);
 $itemBackColor: darken($backColor, 10%);
-$itemBackColorHover: darken($backColor, 5%);
 $angularColor: hsl(347, 100%, 43%);
 $neuShadow: 0.4rem 0.4rem 0.4rem $itemBackColor,
   -0.4rem -0.4rem 0.4rem hsl(0, 0%, 100%);
@@ -22,20 +21,21 @@ $itemPadding: 0.4rem 1rem;
   background: $backColor;
 
   &,
-  input {
+  input[type="text"] {
     color: hsl(0, 0%, 50%);
     font-size: 1.6rem;
   }
 }
 
-input {
+input[type="text"] {
   background: transparent;
   outline: none;
   border: 0;
   border-radius: 1rem;
+  width: 100%;
 }
 
-button.icon {
+.icon {
   border: none;
   width: 4rem;
   height: 4rem;
@@ -47,19 +47,26 @@ button.icon {
   background: none;
   transition: opacity 0.4s, filter 0.4s;
 
+  &:hover {
+    cursor: pointer;
+    background-color: darken($backColor, 10%);
+    color: darken($angularColor, 10%);
+    fill: darken($angularColor, 10%);
+  }
+
   &:disabled {
     filter: grayscale(1);
     opacity: 20%;
+    background: none;
+
+    &:hover {
+      cursor: default;
+    }
   }
 
   svg {
     width: 3.2rem;
     height: 3.2rem;
-  }
-
-  &:hover {
-    cursor: pointer;
-    background-color: $itemBackColorHover;
   }
 }
 
@@ -112,26 +119,7 @@ header {
     &:hover,
     &:active,
     &:focus {
-      cursor: pointer;
-      background-color: $itemBackColorHover;
-    }
-
-    > input[type="text"] {
-      &:hover {
-        cursor: pointer;
-      }
-      &:active,
-      &:focus {
-        color: $angularColor;
-      }
-    }
-
-    .todo-time {
-      margin-left: auto;
-      font-size: 1.2rem;
-      font-family: monospace;
-      width: 6rem;
-      text-align: right;
+      background-color: darken($backColor, 5%);
     }
 
     &.done {
@@ -146,6 +134,39 @@ header {
       &:focus {
         cursor: default;
         background-color: unset;
+      }
+    }
+
+    > input[type="text"] {
+      &:active,
+      &:focus {
+        color: $angularColor;
+      }
+    }
+
+    > input[type="checkbox"] {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .todo-time {
+      margin-left: auto;
+      font-size: 1.2rem;
+      font-family: monospace;
+      width: 6rem;
+      text-align: right;
+    }
+
+    .icon-delete {
+      width: 3.2rem;
+      height: 3.2rem;
+      color: darken($backColor, 40%);
+      fill: darken($backColor, 40%);
+
+      svg {
+        width: 2.4rem;
+        height: 2.4rem;
       }
     }
   }
