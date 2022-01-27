@@ -84,6 +84,20 @@ header {
     color: $angularColor;
     text-align: center;
     font-size: 3.2rem;
+    margin-bottom: 1rem;
+  }
+
+  a,
+  a:visited,
+  a:focus,
+  a:active {
+    text-decoration: none;
+    color: $angularColor;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    color: darken($angularColor, 20%);
   }
 }
 

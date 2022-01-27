@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
-import { Todo } from './todo.model';
+import { Component, OnInit } from '@angular/core';
+import { Todo } from './shared/todo.model';
 import * as moment from 'moment';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   newTodo: string = '';
   todos: Todo[] = [
     { id: 1, text: 'Buy beer', status: true, time: 1642653703431 },
@@ -20,6 +21,17 @@ export class AppComponent {
     { id: 3, text: 'Finish this code', status: false, time: 1642653780050 },
     { id: 4, text: 'Study observables', status: false, time: 1642653792126 },
   ];
+  cookies: string = 'userTodos';
+
+  constructor(private cookieService: CookieService) {}
+
+  ngOnInit() {
+    if (this.cookieService.check(this.cookies)) {
+      this.todos = JSON.parse(this.cookieService.get(this.cookies));
+    } else {
+      this.cookieService.set(this.cookies, JSON.stringify(this.todos));
+    }
+  }
 
   newTodoUpdate(input: Event): void {
     this.newTodo = (<HTMLInputElement>input.target).value;
@@ -34,6 +46,7 @@ export class AppComponent {
         time: moment().valueOf(),
       });
     this.newTodo = '';
+    this.updateCookies();
   }
 
   updateTodo(todoId: number, todoValue: string): void {
@@ -42,6 +55,7 @@ export class AppComponent {
         item.text = todoValue;
       }
     });
+    this.updateCookies();
   }
 
   doneTodo(todoId: number): void {
@@ -50,6 +64,7 @@ export class AppComponent {
         item.status = !item.status;
       }
     });
+    this.updateCookies();
   }
 
   deleteTodo(todoId: number) {
@@ -58,12 +73,10 @@ export class AppComponent {
         this.todos.splice(index, 1);
       }
     });
+    this.updateCookies();
   }
 
-  // OK - Users can edit a to-do
-  // OK - A list with all the completed to-do’s
-  // OK - Users can see a list with all the active to-do’s
-  // OK - User can see the date when he created the to-do
-  // OK - Delete todo
-  // - When closing the browser window the to-do’s will be stored and when the User returns, the data will be retrieved
+  updateCookies() {
+    this.cookieService.set(this.cookies, JSON.stringify(this.todos));
+  }
 }
